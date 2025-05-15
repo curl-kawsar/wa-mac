@@ -1,0 +1,148 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Custom animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes floating {
+  0% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 1s ease-out forwards;
+}
+
+.animate-float {
+  animation: floating 3s ease-in-out infinite;
+}
+
+/* Background images */
+.bgImage {
+  background-image: url('/home_bg.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.homepagesection6_image1{
+  background-image: url('/homepagesection6_image1.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+
+
+.homepagesection6_image2{
+  background-image: url('/homepagesection6_image2.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.homepagesection6_image3{
+  background-image: url('/homepagesection6_image3.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+.homepagesection6_image4{
+  background-image: url('/homepagesection6_image4.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.literata {
+  font-family: var(--font-literata);
+}
+.poppins {
+  font-family: var(--font-poppins);
+}
+.montserrat {
+  font-family: var(--font-montserrat);
+}
+
+.bgImageContact {
+  background-image: url('/contact_us_1.svg');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Change calendar icon color to black */
+/* Add this to your CSS file */
+.time-input::-webkit-calendar-picker-indicator {
+  filter: brightness(0) saturate(100%);
+ /* This approximates #5C1010 */
+}
+
+@media (min-width: 1517px) {
+  select option {
+    font-size: 22px !important;
+    padding: 8px !important;
+  }
+  
+  select {
+    font-size: 22px !important;
+  }
+}
+
+
+
+
