@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Link from "next/link"
 import { Menu, X, Home, Briefcase, Users, PhoneCall, MessageCircle } from "lucide-react"
 import Image from "next/image"
@@ -50,27 +50,56 @@ function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const pathname = usePathname()
+  const scrollPosition = useRef(0)
+  const headerRef = useRef(null)
+
+  // Function to lock scroll
+  const lockScroll = () => {
+    if (typeof window !== 'undefined') {
+      scrollPosition.current = window.pageYOffset
+      document.body.style.overflow = 'hidden'
+      document.body.style.position = 'fixed'
+      document.body.style.top = `-${scrollPosition.current}px`
+      document.body.style.width = '100%'
+    }
+  }
+
+  // Function to unlock scroll
+  const unlockScroll = () => {
+    if (typeof window !== 'undefined') {
+      document.body.style.removeProperty('overflow')
+      document.body.style.removeProperty('position')
+      document.body.style.removeProperty('top')
+      document.body.style.removeProperty('width')
+      window.scrollTo(0, scrollPosition.current)
+    }
+  }
 
   useEffect(() => {
-    // Lock body scroll when mobile menu is open
+    // Lock/unlock body scroll when mobile menu is open
     if (isMenuOpen) {
-      document.body.style.overflow = 'hidden'
+      lockScroll()
     } else {
-      document.body.style.overflow = 'auto'
+      unlockScroll()
     }
 
     return () => {
-      document.body.style.overflow = 'auto'
+      // Clean up by unlocking scroll when component unmounts
+      if (isMenuOpen) {
+        unlockScroll()
+      }
     }
   }, [isMenuOpen])
 
   useEffect(() => {
     const handleScroll = () => {
-      const offset = window.scrollY
-      if (offset > 10) {
-        setScrolled(true)
-      } else {
-        setScrolled(false)
+      if (!isMenuOpen && typeof window !== 'undefined') {
+        const offset = window.scrollY
+        if (offset > 10) {
+          setScrolled(true)
+        } else {
+          setScrolled(false)
+        }
       }
     }
 
@@ -78,7 +107,7 @@ function Navbar() {
     return () => {
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [])
+  }, [isMenuOpen])
 
   const closeMobileMenu = () => {
     setIsMenuOpen(false)
@@ -86,11 +115,14 @@ function Navbar() {
 
   return (
     <>
-      <header className={`sticky top-0 z-[50] w-full transition-all duration-300 overflow-x-hidden ${
-        scrolled 
-          ? "bg-white/80 backdrop-blur-md border-b border-gray-200/50 shadow-md" 
-          : "bg-white border-b border-gray-200 shadow-sm"
-      }`}>
+      <header 
+        ref={headerRef}
+        className={`sticky top-0 z-[50] w-full transition-all duration-300 overflow-x-hidden ${
+          scrolled 
+            ? "bg-white/80 backdrop-blur-md border-b border-gray-200/50 shadow-md" 
+            : "bg-white border-b border-gray-200 shadow-sm"
+        }`}
+      >
         <div className="container mx-auto px-4 py-2 flex items-center justify-between">
           {/* Logo */}
           <div className="flex items-center">
@@ -175,108 +207,111 @@ function Navbar() {
             )}
           </button>
         </div>
-
-        {/* Mobile Navigation Overlay */}
-        <div 
-          className={`fixed inset-0 bg-black bg-opacity-50 z-[55] transition-opacity duration-300 ${
-            isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
-          }`}
-          onClick={closeMobileMenu}
-        />
-        
-        {/* Mobile Sidebar */}
-        <aside 
-          className={`fixed top-0 right-0 bottom-0 w-[80%] max-w-[320px] bg-white shadow-2xl z-[56] transform transition-transform duration-300 ease-in-out ${
-            isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-          } overflow-y-auto`}
-        >
-          {/* Mobile menu header with close button */}
-          <div className="sticky top-0 flex items-center justify-between p-4 bg-white border-b border-gray-200">
-            <div className="flex items-center">
-              <Image
-                src="/navbar_logo.svg"
-                width={28}
-                height={28}
-                alt="WA Management Logo"
-                className="mr-2"
-              />
-              <span className="text-[#5C1010] font-semibold poppins text-sm">WA Management</span>
-            </div>
-            <button 
-              onClick={closeMobileMenu}
-              className="p-1 rounded-full hover:bg-gray-100 transition-colors"
-              aria-label="Close menu"
-            >
-              <X className="h-5 w-5 text-[#5C1010]" />
-            </button>
-          </div>
-          
-          {/* Mobile menu links */}
-          <nav className="py-5 px-4">
-            <ul className="space-y-3">
-              <li>
-                <Link
-                  href="/"
-                  className={`poppins flex items-center text-[15px] text-[#5C1010] hover:text-[#8B2323] transition-colors p-3 rounded-lg ${
-                    pathname === '/' 
-                      ? 'bg-[#FCEEEE] font-medium' 
-                      : 'hover:bg-gray-50 font-normal'
-                  }`}
-                  onClick={closeMobileMenu}
-                >
-                  <Home className="mr-3 h-5 w-5 flex-shrink-0" />
-                  <span>Home</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/services"
-                  className={`poppins flex items-center text-[15px] text-[#5C1010] hover:text-[#8B2323] transition-colors p-3 rounded-lg ${
-                    pathname === '/services' 
-                      ? 'bg-[#FCEEEE] font-medium' 
-                      : 'hover:bg-gray-50 font-normal'
-                  }`}
-                  onClick={closeMobileMenu}
-                >
-                  <Briefcase className="mr-3 h-5 w-5 flex-shrink-0" />
-                  <span>Services</span>
-                </Link>
-              </li>
-              <li>
-                <Link
-                  href="/about-us"
-                  className={`poppins flex items-center text-[15px] text-[#5C1010] hover:text-[#8B2323] transition-colors p-3 rounded-lg ${
-                    pathname === '/about-us' 
-                      ? 'bg-[#FCEEEE] font-medium' 
-                      : 'hover:bg-gray-50 font-normal'
-                  }`}
-                  onClick={closeMobileMenu}
-                >
-                  <Users className="mr-3 h-5 w-5 flex-shrink-0" />
-                  <span>About Us</span>
-                </Link>
-              </li>
-              <li className="pt-3">
-                <Link
-                  href="/contact-us"
-                  className="poppins flex items-center justify-center text-[15px] w-full font-medium bg-[#5C1010] text-white px-4 py-3 rounded-lg hover:bg-[#7B1A1A] transition-colors shadow-md"
-                  onClick={closeMobileMenu}
-                >
-                  <PhoneCall className="mr-2 h-5 w-5 flex-shrink-0" />
-                  <span>Contact Us</span>
-                </Link>
-              </li>
-            </ul>
-          </nav>
-
-          {/* Mobile menu footer */}
-          <div className="mt-auto p-4 border-t border-gray-200">
-            <p className="text-center text-gray-500 text-xs">
-              © {new Date().getFullYear()} WA Management & Consulting.<br />All rights reserved.
-            </p>
-          </div>
-        </aside>
       </header>
+
+      {/* Fixed position elements - separate from the header */}
+      {/* Mobile Navigation Overlay */}
+      <div 
+        className={`fixed inset-0 bg-black bg-opacity-50 z-[55] transition-opacity duration-300 ${
+          isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible pointer-events-none'
+        }`}
+        onClick={closeMobileMenu}
+        style={{ height: '100vh' }}
+      />
+      
+      {/* Mobile Sidebar - Fixed position independent of scroll */}
+      <aside 
+        className={`fixed top-0 right-0 h-100vh w-[80%] max-w-[320px] bg-white shadow-2xl z-[56] transform transition-transform duration-300 ease-in-out ${
+          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
+        } overflow-y-auto`}
+        style={{ height: '100vh' }}
+      >
+        {/* Mobile menu header with close button */}
+        <div className="sticky top-0 flex items-center justify-between p-4 bg-white border-b border-gray-200 z-10">
+          <div className="flex items-center">
+            <Image
+              src="/navbar_logo.svg"
+              width={28}
+              height={28}
+              alt="WA Management Logo"
+              className="mr-2"
+            />
+            <span className="text-[#5C1010] font-semibold poppins text-sm">WA Management</span>
+          </div>
+          <button 
+            onClick={closeMobileMenu}
+            className="p-1 rounded-full hover:bg-gray-100 transition-colors"
+            aria-label="Close menu"
+          >
+            <X className="h-5 w-5 text-[#5C1010]" />
+          </button>
+        </div>
+        
+        {/* Mobile menu links */}
+        <nav className="py-5 px-4">
+          <ul className="space-y-3">
+            <li>
+              <Link
+                href="/"
+                className={`poppins flex items-center text-[15px] text-[#5C1010] hover:text-[#8B2323] transition-colors p-3 rounded-lg ${
+                  pathname === '/' 
+                    ? 'bg-[#FCEEEE] font-medium' 
+                    : 'hover:bg-gray-50 font-normal'
+                }`}
+                onClick={closeMobileMenu}
+              >
+                <Home className="mr-3 h-5 w-5 flex-shrink-0" />
+                <span>Home</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/services"
+                className={`poppins flex items-center text-[15px] text-[#5C1010] hover:text-[#8B2323] transition-colors p-3 rounded-lg ${
+                  pathname === '/services' 
+                    ? 'bg-[#FCEEEE] font-medium' 
+                    : 'hover:bg-gray-50 font-normal'
+                }`}
+                onClick={closeMobileMenu}
+              >
+                <Briefcase className="mr-3 h-5 w-5 flex-shrink-0" />
+                <span>Services</span>
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/about-us"
+                className={`poppins flex items-center text-[15px] text-[#5C1010] hover:text-[#8B2323] transition-colors p-3 rounded-lg ${
+                  pathname === '/about-us' 
+                    ? 'bg-[#FCEEEE] font-medium' 
+                    : 'hover:bg-gray-50 font-normal'
+                }`}
+                onClick={closeMobileMenu}
+              >
+                <Users className="mr-3 h-5 w-5 flex-shrink-0" />
+                <span>About Us</span>
+              </Link>
+            </li>
+            <li className="pt-3">
+              <Link
+                href="/contact-us"
+                className="poppins flex items-center justify-center text-[15px] w-full font-medium bg-[#5C1010] text-white px-4 py-3 rounded-lg hover:bg-[#7B1A1A] transition-colors shadow-md"
+                onClick={closeMobileMenu}
+              >
+                <PhoneCall className="mr-2 h-5 w-5 flex-shrink-0" />
+                <span>Contact Us</span>
+              </Link>
+            </li>
+          </ul>
+        </nav>
+
+        {/* Mobile menu footer */}
+        <div className="mt-auto p-4 border-t border-gray-200">
+          <p className="text-center text-gray-500 text-xs">
+            © {new Date().getFullYear()} WA Management & Consulting.<br />All rights reserved.
+          </p>
+        </div>
+      </aside>
 
       {/* Add the WhatsApp Button component */}
       <WhatsAppButton />
