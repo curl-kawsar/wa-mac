@@ -23,7 +23,7 @@ const BenefitCard = ({ img, title, subtitle }) => (
 
 const BenefitsSection = () => {
   return (
-    <div className="relative w-full overflow-hidden">
+    <div className="relative w-full overflow-hidden -mt-36">
       {/* Pink background */}
       <div className="absolute inset-0 bg-[#FCEEEE]"></div>
       

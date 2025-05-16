@@ -10,7 +10,7 @@ import HeroSliderAnimation from '../components/home/HeroSliderAnimation';
 const Home = () => {
   return (
     <div className="bg-white relative">
-      <div className="relative">
+      <div className="relative overflow-hidden">
         <HeroSection />
         <BenefitsSection />
       </div>
