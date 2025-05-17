@@ -35,11 +35,11 @@ const WhatsAppButton = () => {
       </a>
       
       {/* Tooltip that appears on hover */}
-      <div className="absolute left-16 bottom-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-0 group-hover:scale-100 origin-left">
+      <div className="absolute right-16 bottom-4 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform scale-0 group-hover:scale-100 origin-right">
         <div className="bg-white text-[#5C1010] text-xs sm:text-sm poppins font-medium py-2 px-3 sm:px-4 rounded shadow-md whitespace-nowrap">
           Chat with us
           {/* Triangle pointer */}
-          <div className="absolute -left-2 top-1/2 transform -translate-y-1/2 border-8 border-transparent border-r-white"></div>
+          <div className="absolute -right-2 top-1/2 transform -translate-y-1/2 border-8 border-transparent border-l-white"></div>
         </div>
       </div>
     </div>
