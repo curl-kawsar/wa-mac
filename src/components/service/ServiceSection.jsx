@@ -1,10 +1,39 @@
 import icon from '../../assets/lucide.png' 
 import Image from 'next/image'
-import { useState } from 'react'
+import { useState, useRef, useEffect } from 'react'
 
 export default function ServiceSection() {
   const [activeTab, setActiveTab] = useState('landlord');
   const [activePackage, setActivePackage] = useState('deluxe');
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
+  const dropdownRef = useRef(null);
+
+  const handleTabClick = (tabId) => {
+    if (tabId === 'landlord') {
+      setIsDropdownOpen(!isDropdownOpen);
+    } else {
+      setActiveTab(tabId);
+      setIsDropdownOpen(false);
+    }
+  };
+
+  const handlePackageClick = (packageId) => {
+    setActivePackage(packageId);
+    setIsDropdownOpen(false);
+  };
+
+  // Close dropdown when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsDropdownOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   return (
     <section className="bg-gradient-to-b from-[#FAF5F5] to-[#FDF7F7] py-14">
@@ -20,48 +49,71 @@ export default function ServiceSection() {
           <h2 className="text-center text-4xl font-bold mb-12 text-[#5C1010] literata">
             Property Management Solutions
           </h2>
-          
-          {/* Clean Tab Design */}
-          <div className="flex flex-wrap justify-center gap-8 mb-6 relative">
-            {[
-              { id: 'landlord', label: 'Landlord' },
-              { id: 'homeowner', label: 'Home Owner' },
-              { id: 'tenant', label: 'Tenant' }
-            ].map((tab) => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
-                className={`px-4 py-2 text-lg poppins font-medium relative transition-all duration-300 ${
-                  activeTab === tab.id 
-                    ? 'text-[#5C1010]' 
-                    : 'text-gray-500 hover:text-gray-800'
-                }`}
-              >
-                {tab.label}
-                {activeTab === tab.id && (
-                  <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-[#5C1010]"></div>
-                )}
-              </button>
-            ))}
-          </div>
         </div>
-
-        {/* Package Selection - White Theme */}
-        <div className="flex justify-center gap-4 mb-12 max-w-lg mx-auto">
-          {[
-            { id: 'deluxe', label: 'Deluxe Package' },
-            { id: 'standard', label: 'Standard Package' }
-          ].map((pkg) => (
+          
+        {/* Clean Tab Design with Dropdown */}
+        <div className="flex flex-wrap justify-center gap-8 mb-12 relative">
+          <div className="relative" ref={dropdownRef}>
             <button
-              key={pkg.id}
-              onClick={() => setActivePackage(pkg.id)}
-              className={`py-3 px-4 md:px-6 flex-1 whitespace-nowrap text-center border rounded-md transition-all poppins ${
-                activePackage === pkg.id
-                  ? 'bg-[#5C1010] text-white font-medium border-[#5C1010]'
-                  : 'bg-white text-gray-700 hover:bg-gray-50 border-gray-200'
+              onClick={() => handleTabClick('landlord')}
+              className={`px-4 py-2 text-lg poppins font-medium relative transition-all duration-300 flex items-center ${
+                activeTab === 'landlord' 
+                  ? 'text-[#5C1010]' 
+                  : 'text-gray-500 hover:text-gray-800'
               }`}
             >
-              {pkg.label}
+              Landlord
+              <svg 
+                className={`ml-1 w-4 h-4 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} 
+                fill="none" 
+                stroke="currentColor" 
+                viewBox="0 0 24 24" 
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+              {activeTab === 'landlord' && (
+                <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-[#5C1010]"></div>
+              )}
+            </button>
+            
+            {/* Dropdown Menu */}
+            {isDropdownOpen && (
+              <div className="absolute z-50 mt-2 py-2 w-48 bg-white rounded-md shadow-lg border border-gray-100 animate-slideDown">
+                {[
+                  { id: 'deluxe', label: 'Deluxe Package' },
+                  { id: 'standard', label: 'Standard Package' }
+                ].map((pkg) => (
+                  <button
+                    key={pkg.id}
+                    onClick={() => handlePackageClick(pkg.id)}
+                    className={`w-full text-left px-4 py-2 text-sm poppins transition-colors ${
+                      activePackage === pkg.id
+                        ? 'bg-[#f8f2f2] text-[#5C1010] font-medium'
+                        : 'text-gray-700 hover:bg-gray-50'
+                    }`}
+                  >
+                    {pkg.label}
+                  </button>
+                ))}
+              </div>
+            )}
+          </div>
+          
+          {['homeowner', 'tenant'].map((tabId) => (
+            <button
+              key={tabId}
+              onClick={() => handleTabClick(tabId)}
+              className={`px-4 py-2 text-lg poppins font-medium relative transition-all duration-300 ${
+                activeTab === tabId 
+                  ? 'text-[#5C1010]' 
+                  : 'text-gray-500 hover:text-gray-800'
+              }`}
+            >
+              {tabId === 'homeowner' ? 'Home Owner' : 'Tenant'}
+              {activeTab === tabId && (
+                <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-[#5C1010]"></div>
+              )}
             </button>
           ))}
         </div>
