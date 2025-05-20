@@ -283,24 +283,28 @@ const ContactForm = () => {
             </button>
           </div>
 
-          <div className="flex items-start gap-2 mt-4">
+          <div className="flex items-start gap-3 mt-4">
             <input
               type="checkbox"
               id="agreement"
               name="agreement"
               checked={formData.agreement}
               onChange={handleChange}
-              className="mt-1"
+              className="mt-1 h-4 w-4 text-[#5C1010] border-gray-300 rounded focus:ring-[#5C1010]"
             />
-            <div className="text-center poppins text-xs md:text-sm lg:text-sm xl:text-sm text-[#6E6E6E]">
-              By checking this box you agree to send and receive messages from
-              <span className="font-semibold"> WA-MAC</span>. <br />
-              You also agree to the Terms of Service and &nbsp;
+            <div className="poppins text-xs md:text-sm text-[#6E6E6E] text-left">
+              By opting into SMS from a web form or other medium, you are agreeing to receive SMS messages from WA Management & Consulting, LLC. This includes SMS messages for appointment scheduling, appointment reminders, post-visit instructions, lab notifications, and billing notifications. Message frequency varies. Message and data rates may apply. See privacy policy at{" "}
               <Link href="/terms">
+                <span className="text-[#5C1010] cursor-pointer font-medium">Privacy Policy</span>
+              </Link>. 
+              Message HELP for help. Reply STOP to any message to opt out.
+              {/* <span className="font-semibold"> WA-MAC</span>. <br />
+              You also agree to the Terms of Service and &nbsp; */}
+              {/* <Link href="/terms">
                 <span className="text-[#5C1010] underline cursor-pointer">Privacy Policy</span>.
-              </Link>
+              </Link> */}
               {errors.agreement && (
-                <p className="mt-1 text-red-500 text-xs">{errors.agreement}</p>
+                <p className="mt-2 text-red-500 text-xs font-medium">{errors.agreement}</p>
               )}
             </div>
           </div>
