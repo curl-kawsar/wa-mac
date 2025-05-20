@@ -7,7 +7,7 @@ export default function ServiceSection() {
   const [activePackage, setActivePackage] = useState('deluxe');
 
   return (
-    <section className="bg-white py-14">
+    <section className="bg-gradient-to-b from-[#FAF5F5] to-[#FDF7F7] py-14">
       <div className="w-full max-w-7xl mx-auto px-4">
         {/* Clean Header Design with White Theme */}
         <div className="mb-16 text-center">
@@ -47,7 +47,7 @@ export default function ServiceSection() {
         </div>
 
         {/* Package Selection - White Theme */}
-        <div className="flex justify-center gap-4 mb-12 max-w-md mx-auto">
+        <div className="flex justify-center gap-4 mb-12 max-w-lg mx-auto">
           {[
             { id: 'deluxe', label: 'Deluxe Package' },
             { id: 'standard', label: 'Standard Package' }
@@ -55,7 +55,7 @@ export default function ServiceSection() {
             <button
               key={pkg.id}
               onClick={() => setActivePackage(pkg.id)}
-              className={`py-4 px-8 flex-1 text-center border rounded-md transition-all poppins ${
+              className={`py-3 px-4 md:px-6 flex-1 whitespace-nowrap text-center border rounded-md transition-all poppins ${
                 activePackage === pkg.id
                   ? 'bg-[#5C1010] text-white font-medium border-[#5C1010]'
                   : 'bg-white text-gray-700 hover:bg-gray-50 border-gray-200'
