@@ -19,9 +19,9 @@ const HeroSection = () => {
           </p>
           <div className="w-full flex justify-center lg:justify-start">
             <Button
-              href="/contact-us"
-              size="md"
-              className="mt-6 text-[18px] sm:text-[20px] lg:text-[24px] w-[250px] sm:w-[300px] lg:w-[340px] 2xl:w-[400px] 2xl:h-24 2xl:text-[32px] whitespace-nowrap"
+              href="/services"
+              size="sm"
+              className="mt-6 text-[14px] font-bold sm:text-[16px] lg:text-[18px] w-[200px] sm:w-[220px] lg:w-[250px] 2xl:w-[280px] 2xl:h-16 2xl:text-[22px] whitespace-nowrap"
             >
               Explore our services
             </Button>
