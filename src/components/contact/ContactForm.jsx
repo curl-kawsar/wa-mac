@@ -293,7 +293,7 @@ const ContactForm = () => {
               className="mt-1 h-4 w-4 text-[#5C1010] border-gray-300 rounded focus:ring-[#5C1010]"
             />
             <div className="poppins text-xs md:text-sm text-[#6E6E6E] text-justify">
-              By opting into SMS from a web form or other medium, you are agreeing to receive SMS messages from WA Management & Consulting, LLC. This includes SMS messages for appointment scheduling, appointment reminders, post-visit instructions, lab notifications, and billing notifications. Message frequency varies. Message and data rates may apply. See {" "}
+              By opting into SMS from a web form or other medium, you are agreeing to receive SMS messages from WA Management & Consulting, LLC. This includes SMS messages for appointment scheduling, appointment reminders, post-visit instructions, and billing notifications. Message frequency varies. Message and data rates may apply. See {" "}
               <Link href="/terms">
                 <span className="text-[#5C1010] cursor-pointer font-medium">Privacy Policy</span>
               </Link>. 
