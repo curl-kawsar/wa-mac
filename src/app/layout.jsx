@@ -31,8 +31,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
-  title: "Wa-mac Management & Consulting - Your Home, Fully Managed. Your Time, Fully Yours.",
-  description: "Wa-mac Management & Consulting - Your Home, Fully Managed. Your Time, Fully Yours.",
+  title: "WA Management & Consulting - Your Home, Fully Managed. Your Time, Fully Yours.",
+  description: "WA Management & Consulting - Your Home, Fully Managed. Your Time, Fully Yours.",
   icons: {
     icon: '/footer_logo2.svg', 
     shortcut: '/footer_logo2.svg',
