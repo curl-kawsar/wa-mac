@@ -225,65 +225,74 @@ export default function Terms() {
         <p className="mb-8">We implement industry-standard protocols to protect your data from unauthorized access or disclosure. This includes encryption, access restrictions, and secure data storage.</p>
 
 
-        <h2 className="text-2xl font-semibold mb-4 text-[#5C1010]">10. Data Collection and Use</h2>
-        <p className="mb-4">We collect personal information including, but not limited to:</p>
-        <ul className="list-disc list-inside mb-4 space-y-2">
-          <li>Name</li>
-          <li>Email address</li>
-          <li>Phone number</li>
-          <li>Property-related information</li>
-          <li>Communication preferences</li>
-        </ul>
-        <p className="mb-8">
-          This data is used exclusively for providing property management services, customer support, and communications. We do not use your information for unrelated marketing purposes without your consent.
+        <h2 className="text-2xl font-semibold mb-4 text-[#5C1010]">10. What Information Is Collected</h2>
+<p className="mb-4">We collect personal information including, but not limited to:</p>
+<ul className="list-disc list-inside mb-4 space-y-2">
+  <li>Name</li>
+  <li>Email address</li>
+  <li>Phone number</li>
+  <li>Property-related information</li>
+  <li>Communication preferences</li>
+</ul>
+<p className="mb-8">
+  This data is used exclusively for providing property management services, customer support, and communications. We do not use your information for unrelated marketing purposes without your consent.
+</p>
 
-        </p>
+<h2 className="text-2xl font-semibold mb-4 text-[#5C1010]">11. How personal information is used</h2>
+<p className="mb-8">
+  This data is used exclusively for providing property management services, customer support, and communications. We do not use your information for unrelated marketing purposes without your consent.
+</p>
 
-        <h2 className="text-2xl font-semibold mb-4 text-[#5C1010]">11. Business Transfer</h2>
-        <p className="mb-8">
-          In the event of a merger, acquisition, or sale of the company, your information may be transferred to the new entity. The successor entity will honor the commitments outlined in this policy.
-        </p>
+<h2 className="text-2xl font-semibold mb-4 text-[#5C1010]">12. Information Sharing and Disclosure</h2>
+<p className="mb-8">
+  We do not sell or rent your personal information to third parties. We do not sell, rent, release, or transfer your SMS consent or phone number to any third party for any third party marketing purposes.
+</p>
 
-        <h2 className="text-2xl font-semibold mb-4 text-[#5C1010]">12. Your Rights</h2>
-        <p className="mb-4">You have the right to:</p>
-        <ul className="list-disc list-inside mb-4 space-y-2">
-          <li>Access the personal data we hold about you</li>
-          <li>Request correction of inaccurate or incomplete data</li>
-          <li>Request deletion of your data (subject to contractual or legal obligations)</li>
-          <li>Withdraw consent for communication at any time</li>
-        </ul>
-        <p className="mb-8">
-          To exercise these rights, contact us at: <a href="mailto:contact@wa-mac.com" className="text-blue-600 underline">contact@wa-mac.com</a>
-        </p>
+<h2 className="text-2xl font-semibold mb-4 text-[#5C1010]">13. Business Transfer</h2>
+<p className="mb-8">
+  In the event of a merger, acquisition, or sale of the company, your information may be transferred to the new entity. The successor entity will honor the commitments outlined in this policy.
+</p>
 
-        <h2 className="text-2xl font-semibold mb-4 text-[#5C1010]">13. Service Modifications</h2>
-        <p className="mb-8">
-          WA Management & Consulting LLC reserves the right to alter, suspend, or discontinue services or the website at any time, with or without notice.
-        </p>
+<h2 className="text-2xl font-semibold mb-4 text-[#5C1010]">14. Your Rights</h2>
+<p className="mb-4">You have the right to:</p>
+<ul className="list-disc list-inside mb-4 space-y-2">
+  <li>Access the personal data we hold about you</li>
+  <li>Request correction of inaccurate or incomplete data</li>
+  <li>Request deletion of your data (subject to contractual or legal obligations)</li>
+  <li>Withdraw consent for communication at any time</li>
+</ul>
+<p className="mb-8">
+  To exercise these rights, contact us at: <a href="mailto:contact@wa-mac.com" className="text-blue-600 underline">contact@wa-mac.com</a>
+</p>
 
-        <h2 className="text-2xl font-semibold mb-4 text-[#5C1010]">14. Disclaimer</h2>
-        <p className="mb-8">
-          All content on this website is provided "as is" and without warranties of any kind, expressed or implied. We do not guarantee the accuracy, completeness, or reliability of the information or services provided. We are not liable for any damages resulting from your use of our site or services, to the maximum extent permitted by law.
-        </p>
+<h2 className="text-2xl font-semibold mb-4 text-[#5C1010]">15. Service Modifications</h2>
+<p className="mb-8">
+  WA Management & Consulting LLC reserves the right to alter, suspend, or discontinue services or the website at any time, with or without notice.
+</p>
 
-        <h2 className="text-2xl font-semibold mb-4 text-[#5C1010]">15. Governing Law</h2>
-        <p className="mb-8">
-          These terms shall be governed by and construed in accordance with the laws of the <strong>State of Indiana</strong>, without regard to conflict of law principles.
-        </p>
+<h2 className="text-2xl font-semibold mb-4 text-[#5C1010]">16. Disclaimer</h2>
+<p className="mb-8">
+  All content on this website is provided "as is" and without warranties of any kind, expressed or implied. We do not guarantee the accuracy, completeness, or reliability of the information being provided. We are not liable for any damages resulting from your use of our site or services, to the maximum extent permitted by law.
+</p>
 
-        <h2 className="text-2xl font-semibold mb-4 text-[#5C1010]">16. Changes to this Policy</h2>
-        <p className="mb-8">
-          We reserve the right to revise this combined <strong>Terms and Conditions</strong> and <strong>Privacy Policy</strong> at any time. All changes will be posted on this page. Continued use of our website and services constitutes your acceptance of the updated policy.
-        </p>
+<h2 className="text-2xl font-semibold mb-4 text-[#5C1010]">17. Governing Law</h2>
+<p className="mb-8">
+  These terms shall be governed by and construed in accordance with the laws of the <strong>State of Indiana</strong>, without regard to conflict of law principles.
+</p>
 
-        <h2 className="text-2xl font-semibold mb-4 text-[#5C1010]">17. Contact Us</h2>
-        <p className="mb-2">
-          For questions or concerns about these Terms and Conditions or our Privacy Policy, please contact:
-        </p>
-        <ul className="list-none list-inside mb-8 space-y-2">
-          <li><a href="mailto:contact@wa-mac.com" className="text-blue-600 underline"><strong>contact@wa-mac.com</strong></a></li>
-          <li><strong>WA Management & Consulting LLC</strong></li>
-        </ul>
+<h2 className="text-2xl font-semibold mb-4 text-[#5C1010]">18. Changes to this Policy</h2>
+<p className="mb-8">
+  We reserve the right to revise this combined <strong>Terms and Conditions</strong> and <strong>Privacy Policy</strong> at any time. All changes will be posted on this page. Continued use of our website and services constitutes your acceptance of the updated policy.
+</p>
+
+<h2 className="text-2xl font-semibold mb-4 text-[#5C1010]">19. Contact Us</h2>
+<p className="mb-2">
+  For questions or concerns about these Terms and Conditions or our Privacy Policy, please contact:
+</p>
+<ul className="list-none list-inside mb-8 space-y-2">
+  <li><a href="mailto:contact@wa-mac.com" className="text-blue-600 underline"><strong>contact@wa-mac.com</strong></a></li>
+  <li><strong>WA Management & Consulting LLC</strong></li>
+</ul>
 
 
 
