@@ -234,9 +234,6 @@ export default function Terms() {
   <li>Property-related information</li>
   <li>Communication preferences</li>
 </ul>
-<p className="mb-8">
-  This data is used exclusively for providing property management services, customer support, and communications. We do not use your information for unrelated marketing purposes without your consent.
-</p>
 
 <h2 className="text-2xl font-semibold mb-4 text-[#5C1010]">11. How personal information is used</h2>
 <p className="mb-8">
