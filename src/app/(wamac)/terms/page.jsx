@@ -152,14 +152,9 @@ export default function Terms() {
         <p className='mb-2' >If you have consented to receive text messages from WA Management & Consulting LLC, you may receive communications such as:
         </p>
         <ul className="list-disc list-inside mb-4 space-y-2">
-          <li>Appointment reminders</li>
-          <li>Maintenance or service updates</li>
           <li>Customer care</li>
           <li>Marketing notification</li>
           <li>Account notification</li>
-          <li>Follow-up messages</li>
-          <li>Billing or account inquiries</li>
-          <li>Promotions or offers (if applicable)</li>
         </ul>
         <p className="mb-4 italic">Example: “Hello, this is a friendly reminder of your upcoming appointment with WA Management & Consulting LLC at [Property Address] on [Date] at [Time]. You can reply STOP to opt out at any time.”</p>
 
@@ -167,9 +162,6 @@ export default function Terms() {
         <p className='mb-2' >You may opt in to receive SMS messages by one or more of the following methods:
         </p>
         <ul className="list-disc list-inside mb-4 space-y-2">
-          <li>Verbal confirmation with staff</li>
-          <li>Submitting an online form on our website</li>
-          <li>Completing a physical/paper form</li>
           <li>Fill out a website form</li>
         </ul>
 
