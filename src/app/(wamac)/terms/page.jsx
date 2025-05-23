@@ -154,6 +154,9 @@ export default function Terms() {
         <ul className="list-disc list-inside mb-4 space-y-2">
           <li>Appointment reminders</li>
           <li>Maintenance or service updates</li>
+          <li>Customer care</li>
+          <li>Marketing notification</li>
+          <li>Account notification</li>
           <li>Follow-up messages</li>
           <li>Billing or account inquiries</li>
           <li>Promotions or offers (if applicable)</li>
@@ -167,6 +170,7 @@ export default function Terms() {
           <li>Verbal confirmation with staff</li>
           <li>Submitting an online form on our website</li>
           <li>Completing a physical/paper form</li>
+          <li>Fill out a website form</li>
         </ul>
 
         <h3 className="text-xl font-semibold mb-2">6.3 Opt-Out Method</h3>
