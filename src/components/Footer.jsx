@@ -50,6 +50,9 @@ const Footer = () => {
           <Link href="/contact-us" className="cursor-pointer text-xs md:text-sm [@media(min-width:1517px)]:text-lg poppins hover:underline hover:decoration-white">
             Contact us
           </Link>
+          <Link href="/terms" className="cursor-pointer text-xs md:text-sm [@media(min-width:1517px)]:text-lg poppins hover:underline hover:decoration-white">
+            Privacy Policy
+          </Link>
         </div>
 
         {/* Section 3: Subscription, Social, Contact */}
