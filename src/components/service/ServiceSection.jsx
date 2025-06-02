@@ -1,141 +1,279 @@
-import icon from '../../assets/lucide.png' 
+import { useState, useEffect } from 'react'
 import Image from 'next/image'
-import { useState, useRef, useEffect } from 'react'
+import icon from '../../assets/lucide.png'
+import { motion, AnimatePresence } from 'framer-motion'
 
 export default function ServiceSection() {
-  const [activeTab, setActiveTab] = useState('landlord');
-  const [activePackage, setActivePackage] = useState('deluxe');
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const dropdownRef = useRef(null);
+  const [selectedCategory, setSelectedCategory] = useState('landlord')
+  const [selectedPackage, setSelectedPackage] = useState('deluxe')
+  
+  // Service data organized by category and package
+  const serviceData = {
+    landlord: {
+      deluxe: [
+        {
+          title: "Premium Property Listing",
+          description: "Professional photography and premium placement on top rental sites",
+          icon: icon,
+        },
+        {
+          title: "24/7 Maintenance Coordination",
+          description: "Round-the-clock response to all property maintenance needs",
+          icon: icon,
+        },
+        {
+          title: "Tenant Screening & Selection",
+          description: "Comprehensive background checks and selection process",
+          icon: icon,
+        },
+        {
+          title: "Rent Collection & Accounting",
+          description: "Automated rent collection and detailed financial reporting",
+          icon: icon,
+        },
+        {
+          title: "Legal Compliance Management",
+          description: "Stay updated with all property regulations and requirements",
+          icon: icon,
+        },
+        {
+          title: "Property Inspection Services",
+          description: "Regular inspections with detailed photo documentation",
+          icon: icon,
+        },
+      ],
+      standard: [
+        {
+          title: "Basic Property Listing",
+          description: "Standard listing on major rental platforms",
+          icon: icon,
+        },
+        {
+          title: "Basic Maintenance Coordination",
+          description: "Business hours response to maintenance requests",
+          icon: icon,
+        },
+        {
+          title: "Basic Tenant Screening",
+          description: "Essential background and credit checks for applicants",
+          icon: icon,
+        },
+        {
+          title: "Monthly Rent Collection",
+          description: "Standard rent processing and basic reporting",
+          icon: icon,
+        },
+        {
+          title: "Quarterly Inspections",
+          description: "Seasonal property check-ups with reports",
+          icon: icon,
+        },
+        {
+          title: "Lease Renewal Handling",
+          description: "Management of lease extensions and renewals",
+          icon: icon,
+        },
+      ]
+    },
+    homeowner: [
+      {
+        title: "Home Maintenance Services",
+        description: "Regular check-ups and preventative maintenance solutions",
+        icon: icon,
+      },
+      {
+        title: "Emergency Repairs",
+        description: "24/7 emergency repair services for homeowners",
+        icon: icon,
+      },
+      {
+        title: "Renovation Management",
+        description: "Professional oversight of all your home improvement projects",
+        icon: icon,
+      },
+      {
+        title: "Property Value Assessment",
+        description: "Expert analysis of your property's current market value",
+        icon: icon,
+      },
+      {
+        title: "Insurance Coordination",
+        description: "Assistance with claims and policy management",
+        icon: icon,
+      },
+      {
+        title: "Home Security Solutions",
+        description: "Modern security implementations for complete peace of mind",
+        icon: icon,
+      },
+    ],
+    tenant: [
+      {
+        title: "Maintenance Request System",
+        description: "Simple online system for submitting maintenance needs",
+        icon: icon,
+      },
+      {
+        title: "Rent Payment Portal",
+        description: "Convenient online payment options with payment history",
+        icon: icon,
+      },
+      {
+        title: "Move-in/Move-out Assistance",
+        description: "Comprehensive support for relocations and transitions",
+        icon: icon,
+      },
+      {
+        title: "Community Events Access",
+        description: "Exclusive access to community activities and gatherings",
+        icon: icon,
+      },
+      {
+        title: "Tenant Rights Advisory",
+        description: "Expert guidance on tenant rights and responsibilities",
+        icon: icon,
+      },
+      {
+        title: "Utility Setup Assistance",
+        description: "Help coordinating all necessary utility connections",
+        icon: icon,
+      },
+    ]
+  };
 
-  const handleTabClick = (tabId) => {
-    if (tabId === 'landlord') {
-      setIsDropdownOpen(!isDropdownOpen);
-    } else {
-      setActiveTab(tabId);
-      setIsDropdownOpen(false);
+  // Get services based on current selection
+  const getActiveServices = () => {
+    if (selectedCategory === 'landlord') {
+      return serviceData.landlord[selectedPackage];
     }
+    return serviceData[selectedCategory];
   };
-
-  const handlePackageClick = (packageId) => {
-    setActivePackage(packageId);
-    setIsDropdownOpen(false);
-  };
-
-  // Close dropdown when clicking outside
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
-        setIsDropdownOpen(false);
-      }
-    };
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, []);
-
+  
   return (
-    <section className="bg-gradient-to-b from-[#FAF5F5] to-[#FDF7F7] py-14">
-      <div className="w-full max-w-7xl mx-auto px-4">
-        {/* Clean Header Design with White Theme */}
-        <div className="mb-16 text-center">
-          <div className="flex items-center justify-center mb-2">
-            <div className="w-12 h-0.5 bg-[#5C1010]"></div>
-            <h4 className="mx-3 text-[#5C1010] font-medium poppins">EXCLUSIVE SERVICES</h4>
-            <div className="w-12 h-0.5 bg-[#5C1010]"></div>
-          </div>
-          
-          <h2 className="text-center text-4xl font-bold mb-12 text-[#5C1010] literata">
-            Property Management Solutions
+    <section className="py-20 bg-gradient-to-br from-white to-[#FDF7F7]">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6">
+        {/* Elegant animated header */}
+        <motion.div 
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="text-center mb-16"
+        >
+          <span className="inline-block px-4 py-1 bg-[#F8F0F0] text-[#5C1010] rounded-full text-sm font-medium tracking-wide mb-3">
+            TAILORED PROPERTY SOLUTIONS
+          </span>
+          <h2 className="text-4xl md:text-5xl font-bold text-[#5C1010] literata leading-tight">
+            Services Designed For Your Needs
           </h2>
-        </div>
-          
-        {/* Clean Tab Design with Dropdown */}
-        <div className="flex flex-wrap justify-center gap-8 mb-12 relative">
-          <div className="relative" ref={dropdownRef}>
-            <button
-              onClick={() => handleTabClick('landlord')}
-              className={`px-4 py-2 text-lg poppins font-medium relative transition-all duration-300 flex items-center ${
-                activeTab === 'landlord' 
-                  ? 'text-[#5C1010]' 
-                  : 'text-gray-500 hover:text-gray-800'
-              }`}
-            >
-              Landlord
-              <svg 
-                className={`ml-1 w-4 h-4 transition-transform duration-300 ${isDropdownOpen ? 'rotate-180' : ''}`} 
-                fill="none" 
-                stroke="currentColor" 
-                viewBox="0 0 24 24" 
-                xmlns="http://www.w3.org/2000/svg"
+          <div className="w-24 h-1 bg-[#5C1010] mx-auto mt-6 rounded-full"></div>
+        </motion.div>
+        
+        {/* Interactive category selector */}
+        <div className="flex flex-wrap justify-center mb-12">
+          <div className="bg-white p-2 rounded-xl shadow-sm flex gap-2 md:gap-4">
+            {['landlord', 'homeowner', 'tenant'].map((category) => (
+              <button
+                key={category}
+                onClick={() => {
+                  setSelectedCategory(category);
+                  if (category === 'landlord') setSelectedPackage('deluxe');
+                }}
+                className={`px-6 py-3 rounded-lg text-base font-medium transition-all duration-300 ${
+                  selectedCategory === category 
+                    ? 'bg-[#5C1010] text-white shadow-md' 
+                    : 'bg-transparent text-gray-600 hover:bg-gray-100'
+                }`}
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"></path>
-              </svg>
-              {activeTab === 'landlord' && (
-                <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-[#5C1010]"></div>
-              )}
-            </button>
-            
-            {/* Dropdown Menu */}
-            {isDropdownOpen && (
-              <div className="absolute z-50 mt-2 py-2 w-48 bg-white rounded-md shadow-lg border border-gray-100 animate-slideDown">
-                {[
-                  { id: 'deluxe', label: 'Deluxe Package' },
-                  { id: 'standard', label: 'Standard Package' }
-                ].map((pkg) => (
+                {category.charAt(0).toUpperCase() + category.slice(1)}
+              </button>
+            ))}
+          </div>
+        </div>
+        
+        {/* Package selector (only for landlord) */}
+        <AnimatePresence>
+          {selectedCategory === 'landlord' && (
+            <motion.div 
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.3 }}
+              className="mb-12"
+            >
+              <div className="flex justify-center gap-6">
+                {['deluxe', 'standard'].map((pkg) => (
                   <button
-                    key={pkg.id}
-                    onClick={() => handlePackageClick(pkg.id)}
-                    className={`w-full text-left px-4 py-2 text-sm poppins transition-colors ${
-                      activePackage === pkg.id
-                        ? 'bg-[#f8f2f2] text-[#5C1010] font-medium'
-                        : 'text-gray-700 hover:bg-gray-50'
+                    key={pkg}
+                    onClick={() => setSelectedPackage(pkg)}
+                    className={`relative group px-8 py-3 border-2 rounded-lg transition-all duration-300 ${
+                      selectedPackage === pkg
+                        ? 'border-[#5C1010] text-[#5C1010]'
+                        : 'border-gray-300 text-gray-500 hover:border-gray-400'
                     }`}
                   >
-                    {pkg.label}
+                    <span className="block text-sm uppercase tracking-wide font-semibold mb-1">
+                      {pkg === 'deluxe' ? 'Premium' : 'Standard'}
+                    </span>
+                    <span className="text-xs opacity-75">
+                      {pkg === 'deluxe' ? 'Comprehensive Management' : 'Basic Support'}
+                    </span>
+                    {selectedPackage === pkg && (
+                      <motion.div 
+                        layoutId="packageIndicator"
+                        className="absolute -bottom-1 left-1/2 w-1/3 h-0.5 bg-[#5C1010]" 
+                        initial={{ x: '-50%' }}
+                        animate={{ x: '-50%' }}
+                        transition={{ duration: 0.3 }}
+                      />
+                    )}
                   </button>
                 ))}
               </div>
-            )}
-          </div>
-          
-          {['homeowner', 'tenant'].map((tabId) => (
-            <button
-              key={tabId}
-              onClick={() => handleTabClick(tabId)}
-              className={`px-4 py-2 text-lg poppins font-medium relative transition-all duration-300 ${
-                activeTab === tabId 
-                  ? 'text-[#5C1010]' 
-                  : 'text-gray-500 hover:text-gray-800'
-              }`}
-            >
-              {tabId === 'homeowner' ? 'Home Owner' : 'Tenant'}
-              {activeTab === tabId && (
-                <div className="absolute -bottom-2 left-0 right-0 h-0.5 bg-[#5C1010]"></div>
-              )}
-            </button>
-          ))}
-        </div>
-
-        {/* Service Cards Grid - White Theme */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          {[...Array(12)].map((_, i) => (
-            <div key={i} className="bg-white border border-gray-200 p-6 rounded-md flex flex-col hover:shadow-md transition-shadow">
-              <div className="mb-4">
-                <div className="w-10 h-10 bg-[#5C1010] flex items-center justify-center rounded">
-                  <Image src={icon} alt="Pest Control Icon" width={24} height={24} />
+            </motion.div>
+          )}
+        </AnimatePresence>
+        
+        {/* Service cards with staggered animation */}
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          <AnimatePresence mode="wait">
+            {getActiveServices().map((service, i) => (
+              <motion.div
+                key={`${selectedCategory}-${selectedPackage}-${i}`}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.95 }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                className="group bg-white p-6 rounded-xl border border-gray-100 hover:border-[#5C1010]/20 shadow-sm hover:shadow-md transition-all duration-300"
+              >
+                <div className="flex items-center mb-5">
+                  <div className="w-12 h-12 rounded-full bg-[#F9EFEF] flex items-center justify-center mr-4 group-hover:bg-[#5C1010] transition-colors duration-300">
+                    <Image 
+                      src={service.icon} 
+                      alt={service.title} 
+                      width={24} 
+                      height={24}
+                      className="group-hover:brightness-[10] transition-all duration-300" 
+                    />
+                  </div>
+                  <h3 className="text-lg font-semibold text-[#5C1010] poppins">{service.title}</h3>
                 </div>
-              </div>
-              <h3 className="text-[#5C1010] poppins font-medium text-lg mb-3">Pest Control Coordination</h3>
-              <p className="text-gray-600 poppins mb-5 flex-grow">
-                A safe, pest-free home without the hassle of calling around or managing follow-ups.
-              </p>
-              <button className="bg-[#5C1010] text-white py-1.5 px-4 rounded self-start hover:bg-[#4a0d0d] transition-colors">
-                Read more
-              </button>
-            </div>
-          ))}
+                <p className="text-gray-600 leading-relaxed mb-6">{service.description}</p>
+                <div className="flex justify-between items-center mt-auto">
+                  <span className="text-xs text-gray-400 uppercase tracking-wider font-medium">Learn More</span>
+                  <div className="w-8 h-8 flex items-center justify-center rounded-full border border-gray-200 group-hover:border-[#5C1010] group-hover:bg-[#5C1010] transition-all duration-300">
+                    <svg 
+                      className="w-4 h-4 text-gray-400 group-hover:text-white transition-colors duration-300" 
+                      fill="none" 
+                      stroke="currentColor" 
+                      viewBox="0 0 24 24"
+                    >
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                    </svg>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </AnimatePresence>
         </div>
       </div>
     </section>

@@ -5,6 +5,8 @@ import { Literata } from 'next/font/google';
 import "./globals.css";
 import Footer from "../components/Footer"
 import Navbar from '../components/Navbar';
+import UnderConstruction from '../components/common/UnderConstruction';
+import { siteConfig } from '../config/site';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -34,7 +36,7 @@ export const metadata = {
   title: "Wa-mac Management & Consulting - Your Home, Fully Managed. Your Time, Fully Yours.",
   description: "Wa-mac Management & Consulting - Your Home, Fully Managed. Your Time, Fully Yours.",
   icons: {
-    icon: '/footer_logo2.svg', 
+    icon: '/footer_logo2.svg',
     shortcut: '/footer_logo2.svg',
   },
 
@@ -48,9 +50,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${montserrat.variable} ${literata.variable} antialiased`}
       >
-        <Navbar/>
-        {children}
-        <Footer/>
+        {siteConfig.underConstruction ? (
+          <UnderConstruction />
+        ) : (
+          <>
+            <Navbar/>
+            {children}
+            <Footer/>
+          </>
+        )}
       </body>
     </html>
   );
