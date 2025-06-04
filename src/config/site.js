@@ -1,7 +1,7 @@
 
 export const siteConfig = {
 
-  underConstruction: false,
+  underConstruction: true,
 
   // Company information for the construction page
   company: {
